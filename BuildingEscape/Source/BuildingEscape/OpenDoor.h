@@ -38,8 +38,9 @@ private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* PressurePlate;
 
-	AActor* ActorThatOpens; // Remember pawn inherits from actor
-
 	AActor* Owner;
+
+	// Returns total mass in kilograms
+	float GetTotalMassOfActorsOnPlate();
 	
 };
