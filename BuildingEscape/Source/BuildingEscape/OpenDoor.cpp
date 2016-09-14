@@ -12,8 +12,6 @@ UOpenDoor::UOpenDoor()
 	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
 }
 
 
@@ -23,6 +21,8 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	Owner = GetOwner();
+
+	if (!PressurePlate) { UE_LOG(LogTemp, Error, TEXT("%s missing pressure plate"), *(Owner->GetName())); }
 }
 
 void UOpenDoor::OpenDoor()
@@ -54,15 +54,14 @@ void UOpenDoor::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompo
 
     //Check if its time to close the door
 	if ((GetWorld()->GetTimeSeconds()) - LastDoorOpenTime > DoorCloseDelay) { CloseDoor(); }
-
-	
-	
 }
 
 
 float UOpenDoor::GetTotalMassOfActorsOnPlate()
 {
 	float TotalMass = 0.f;
+	
+	if (!PressurePlate) { return TotalMass; }
 
 	// Find all overlappin actors
 	TArray<AActor*> OverlappingActors;

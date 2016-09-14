@@ -36,9 +36,9 @@ private:
 	float LastDoorOpenTime;
 
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* PressurePlate;
+		ATriggerVolume* PressurePlate = nullptr;
 
-	AActor* Owner;
+	AActor* Owner = nullptr;
 
 	// Returns total mass in kilograms
 	float GetTotalMassOfActorsOnPlate();

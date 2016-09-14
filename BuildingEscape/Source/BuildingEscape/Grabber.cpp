@@ -24,7 +24,6 @@ void UGrabber::BeginPlay()
 	FindPhysicsHandleComponent();
 	
 	SetupInputComponent();
-
 }
 
 
@@ -85,6 +84,7 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
+	if (!PhysicsHandle) { return; }
 	// If the physics handle is attached
 	if (PhysicsHandle->GrabbedComponent)
 	{
